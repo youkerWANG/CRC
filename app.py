@@ -138,8 +138,10 @@ def options():
     print(area_Breakage)
     print(total_Breakage)
 
+    total_price = total_Breakage + total_crushed + total_Seperated + total_scratch
     context = {'scratch_area': area_scratch,'scratch_price': total_scratch,'seperated_area': area_Seperated,'sep_price': total_Seperated,
-               'crushed_area': area_crushed, 'crushed_price': total_crushed, 'breakage_area': area_Breakage, 'bre_price': total_Breakage}
+               'crushed_area': area_crushed, 'crushed_price': total_crushed, 'breakage_area': area_Breakage, 'bre_price': total_Breakage,
+               'total_price': total_price}
     return render_template('result.html', **context)
 
 
