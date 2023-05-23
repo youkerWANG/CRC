@@ -5,93 +5,93 @@
     <title>Check Your Result</title>
     <style>
         .result-list {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background-color: #eee;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background-color: #eee;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
 
-li {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  text-align: center;
-}
+        li {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
 
-h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
+        h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
 
-.area {
-  font-size: 24px;
-  font-weight: bold;
-  color: #f00;
-}
+        .area {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f00;
+        }
 
-.price {
-  font-size: 24px;
-  font-weight: bold;
-  color: #00f;
-}
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00f;
+        }
 
     </style>
 </head>
 <body>
-    <div class="result-list">
-  <ul>
-    <li>
-      <h3>Scratch Area</h3>
-      <p class="area">{{ scratch_area}}</p>
-    </li>
-    <li>
-      <h3>Scratch Repair Price</h3>
-      <p class="price">{{ scratch_price }}</p>
-    </li>
-    <li>
-      <h3>Seperated Area</h3>
-      <p class="area">{{ seperated_area}}</p>
-    </li>
-      <li>
-      <h3>Seperated Repair Price</h3>
-      <p class="price">{{ sep_price}}</p>
-    </li>
-      <li>
-      <h3>Crushed Area</h3>
-      <p class="area">{{ crushed_area}}</p>
-    </li>
-      <li>
-      <h3>Crushed Repair Price</h3>
-      <p class="price">{{ crushed_price}}</p>
-    </li>
-      <li>
-      <h3>breakage Area</h3>
-      <p class="area">{{ breakage_area}}</p>
-    </li>
-    <li>
-      <h3>breakage Repair Price</h3>
-      <p class="price">{{ bre_price }}</p>
-    </li>
-      <li>
-      <h3>total price</h3>
-      <p class="price">{{ total_price }}</p>
-    </li>
-  </ul>
+<div class="result-list">
+    <ul>
+        <li>
+            <h3>Scratch Area</h3>
+            <p class="area">{{ scratch_area }}</p>
+        </li>
+        <li>
+            <h3>Scratch Repair Price</h3>
+            <p class="price">{{ scratch_price }}</p>
+        </li>
+        <li>
+            <h3>Seperated Area</h3>
+            <p class="area">{{ seperated_area }}</p>
+        </li>
+        <li>
+            <h3>Seperated Repair Price</h3>
+            <p class="price">{{ sep_price }}</p>
+        </li>
+        <li>
+            <h3>Crushed Area</h3>
+            <p class="area">{{ crushed_area }}</p>
+        </li>
+        <li>
+            <h3>Crushed Repair Price</h3>
+            <p class="price">{{ crushed_price }}</p>
+        </li>
+        <li>
+            <h3>breakage Area</h3>
+            <p class="area">{{ breakage_area }}</p>
+        </li>
+        <li>
+            <h3>breakage Repair Price</h3>
+            <p class="price">{{ bre_price }}</p>
+        </li>
+        <li>
+            <h3>total price</h3>
+            <p class="price">{{ total_price }}</p>
+        </li>
+    </ul>
 </div>
 
 </body>
