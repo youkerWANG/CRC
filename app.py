@@ -54,7 +54,9 @@ def photos():
 @app.route('/upload_option', methods=['POST', 'GET'])
 def options():
     elected_options = request.form.getlist('options')
-
+    directory = 'static/user_photos/'
+    if not os.path.exists(directory):
+        os.makedirs(directory)
     photo_paths = [os.path.join('static/user_photos', filename) for filename in os.listdir('static/user_photos') if
                    filename.endswith('.jpg')]
 
