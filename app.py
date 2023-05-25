@@ -57,7 +57,7 @@ def options():
     directory = 'static/user_photos/'
     if not os.path.exists(directory):
         os.makedirs(directory)
-    photo_paths = [os.path.join('static/user_photos', filename) for filename in os.listdir('static/user_photos') if
+    photo_paths = [os.path.join('static/user_photos', filename) for filename in os.listdir(directory) if
                    filename.endswith('.jpg')]
 
     img_path = photo_paths[-1]
