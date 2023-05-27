@@ -33,7 +33,8 @@ model_Breakage = Unet(encoder='resnet34', pre_weight='imagenet', num_classes=n_c
 model_Breakage.model.load_state_dict(torch.load(weight_Breakage, map_location=torch.device(device)))
 model_Breakage.eval()
 
-
+max_num = 0
+image_dir = app.config['UPLOAD_FOLDER']
 @app.route('/')
 def index():  # put application's code here
     return render_template("index.html")
@@ -41,12 +42,18 @@ def index():  # put application's code here
 
 @app.route('/upload_photos', methods=["POST"])
 def photos():
-    files = request.files.getlist('photo')
+    global max_num
+    filenames = os.listdir(image_dir)
+    if filenames:
+        max_num = max(int(name.split('.')[0]) for name in filenames)
+    max_num += 1
 
+    files = request.files.getlist('photo')
     for i in files:
-        filename = i.filename
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        filename = str(max_num) + '.jpg'
+        filepath = os.path.join(image_dir, filename)
         i.save(filepath)
+        max_num += 1  # 更新序号
 
     return redirect(url_for('index', _anchor='upupload'))
 
