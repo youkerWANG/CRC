@@ -60,12 +60,29 @@ def photos():
 
 @app.route('/upload_option', methods=['POST', 'GET'])
 def options():
+    outputs_scratch = []
+    outputs_Seperated = []
+    outputs_crushed = []
+    outputs_Breakage = []
+    total_scratch = 0
+    total_Seperated = 0
+    total_crushed = 0
+    total_Breakage = 0
     elected_options = request.form.getlist('options')
     directory = 'static/user_photos/'
     if not os.path.exists(directory):
         os.makedirs(directory)
-    photo_paths = [os.path.join('static/user_photos', filename) for filename in os.listdir(directory) if
-                   filename.endswith('.jpg')]
+    filenames = os.listdir(directory)
+    photo_paths = []
+    max_num = 0
+    for filename in filenames:
+        if filename.endswith('.jpg'):
+            num = int(filename.split('.')[0])
+            if num > max_num:
+                max_num = num
+                photo_paths = [os.path.join('static/user_photos', filename)]
+            elif num == max_num:
+                photo_paths.append(os.path.join('static/user_photos', filename))
 
     img_path = photo_paths[-1]
 
