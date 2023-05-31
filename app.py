@@ -90,7 +90,7 @@ def options():
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = cv2.resize(img, (256, 256))
 
-    img_input = img / 255.
+    img_input = img.astype(float) / 255.
     img_input = img_input.transpose([2, 0, 1])
     img_input = torch.tensor(img_input).float().to(device)
     img_input = img_input.unsqueeze(0)
