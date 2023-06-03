@@ -1,98 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>Check Your Result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get your results</title>
+    <!-- Add Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <style>
-        .result-list {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
+        .card-text {
+            color: red;
         }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            background-color: #eee;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        li {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            text-align: center;
-        }
-
-        h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .area {
+    </style>
+    <style>
+        .total-price {
             font-size: 24px;
             font-weight: bold;
             color: #f00;
+            text-align: center;
+            margin-top: 50px;
         }
-
-        .price {
-            font-size: 24px;
-            font-weight: bold;
-            color: #00f;
-        }
-
     </style>
 </head>
 <body>
-<div class="result-list">
-    <ul>
-        <li>
-            <h3>Scratch Area</h3>
-            <p class="area">{{ scratch_area }}</p>
-        </li>
-        <li>
-            <h3>Scratch Repair Price</h3>
-            <p class="price">{{ scratch_price }}</p>
-        </li>
-        <li>
-            <h3>Seperated Area</h3>
-            <p class="area">{{ seperated_area }}</p>
-        </li>
-        <li>
-            <h3>Seperated Repair Price</h3>
-            <p class="price">{{ sep_price }}</p>
-        </li>
-        <li>
-            <h3>Crushed Area</h3>
-            <p class="area">{{ crushed_area }}</p>
-        </li>
-        <li>
-            <h3>Crushed Repair Price</h3>
-            <p class="price">{{ crushed_price }}</p>
-        </li>
-        <li>
-            <h3>breakage Area</h3>
-            <p class="area">{{ breakage_area }}</p>
-        </li>
-        <li>
-            <h3>breakage Repair Price</h3>
-            <p class="price">{{ bre_price }}</p>
-        </li>
-        <li>
-            <h3>total price</h3>
-            <p class="price">{{ total_price }}</p>
-        </li>
-    </ul>
-</div>
-
+    <div class="container">
+        <h1 class="text-center my-5">결과 보고서</h1>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">스크래치 영역</h5>
+                        <p class="card-text">{{ scratch_area }}</p>
+                        <h5 class="card-title">스크래치 수리 가격</h5>
+                        <p class="card-text">{{ scratch_price }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">별도 영역/h5>
+                        <p class="card-text">{{ seperated_area }}</p>
+                        <h5 class="card-title">별도 수리 가격</h5>
+                        <p class="card-text">{{ sep_price }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">분쇄된 영역</h5>
+                        <p class="card-text">{{ crushed_area }}</p>
+                        <h5 class="card-title">분쇄 수리 가격</h5>
+                        <p class="card-text">{{ crushed_price }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">파손 영역</h5>
+                        <p class="card-text">{{ breakage_area }}</p>
+                        <h5 class="card-title">파손 수리 가격</h5>
+                        <p class="card-text">{{ bre_price }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="total-price">총 가격 ：{{ total_price }}</div>
+    </body>
 </body>
 </html>
