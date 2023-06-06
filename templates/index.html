@@ -91,21 +91,36 @@
                 <div class="col">
                     <div class="p-3">
                         <form action="/upload_option" method="post">
-                            <label for="pet-select">Choose your Model:</label>
+                            <label for="pet-select">차량 모델 선택</label>
 
                             <select name="car_model" id="pet-select">
                                 <option value="">--Please choose an option--</option>
                                 <option value="Sonata">Sonata</option>
-                                <option value="hyundai">Cat</option>
+                                <option value="Sportage">Sportage</option>
+                            </select><br>
+                            <label for="pet-select">영역 선택</label>
 
+                            <select name="car_part" id="pet-select" multiple="multiple">
+                                <option value="">--Please choose an option--</option>
+                                <option value="part01">앞범퍼</option>
+                                <option value="part02">뒷범퍼</option>
+                                <option value="part03">트렁크</option>
+                                <option value="part04">전조등</option>
+                                <option value="part05">후램프</option>
+                                <option value="part06">본넷</option>
+                                <option value="part07">앞유리</option>
+                                <option value="part08">루프</option>
+                                <option value="part09">뒷유리</option>
+                                <option value="part10">앞펜더</option>
+                                <option value="part11">뒷펜더</option>
+                                <option value="part12">사이드미러</option>
+                                <option value="part13">앞도어</option>
+                                <option value="part14">뒷도어</option>
+                                <option value="part15">스텝</option>
+                                <option value="part16">바퀴휠</option>
                             </select><br>
 
-                            <label for="option1">op1：</label>
-                            <input type="checkbox" id="option1" name="options" value="value1"><br>
-                            <label for="option2">op2：</label>
-                            <input type="checkbox" id="option2" name="options" value="value2"><br>
-                            <label for="option3">op3：</label>
-                            <input type="checkbox" id="option3" name="options" value="value3"><br>
+
                             <button type="submit">submit</button>
                         </form>
                     </div>
