@@ -24,51 +24,21 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center my-5">결과 보고서</h1>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <h1 class="text-center my-5">견적서</h1>
+        <div class="d-flex align-items-center justify-content-center">
             <div class="col">
                 <div class="card h-100 text-center">
                     <div class="card-body">
-                        <h5 class="card-title">스크래치 영역</h5>
-                        <p class="card-text">{{ scratch_area }}</p>
-                        <h5 class="card-title">스크래치 수리 가격</h5>
-                        <p class="card-text">{{ scratch_price }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">별도 영역</h5>
-                        <p class="card-text">{{ seperated_area }}</p>
-                        <h5 class="card-title">별도 수리 가격</h5>
-                        <p class="card-text">{{ sep_price }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">분쇄된 영역</h5>
-                        <p class="card-text">{{ crushed_area }}</p>
-                        <h5 class="card-title">분쇄 수리 가격</h5>
-                        <p class="card-text">{{ crushed_price }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">파손 영역</h5>
-                        <p class="card-text">{{ breakage_area }}</p>
-                        <h5 class="card-title">파손 수리 가격</h5>
-                        <p class="card-text">{{ bre_price }}</p>
+                        <h5 class="card-title">수리 방법</h5>
+                        <p class="card-text">{{ repair_method }}</p> <br>
+                        <h5 class="card-title">예상 수리 비용</h5>
+                        <p class="card-text">{{ rounded_repair_cost }}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="total-price">총 가격 ：{{ total_price }}</div>
+
     </body>
 </body>
 </html>

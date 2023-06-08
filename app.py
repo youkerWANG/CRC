@@ -60,15 +60,9 @@ def photos():
 
 @app.route('/upload_option', methods=['POST', 'GET'])
 def options():
-    outputs_scratch = []
-    outputs_Seperated = []
-    outputs_crushed = []
-    outputs_Breakage = []
-    total_scratch = 0
-    total_Seperated = 0
-    total_crushed = 0
-    total_Breakage = 0
-    elected_options = request.form.getlist('options')
+    outputs = []
+
+    elected_options = request.form.getlist('options') # 옵션
     directory = 'static/user_photos/'
     if not os.path.exists(directory):
         os.makedirs(directory)
@@ -88,12 +82,13 @@ def options():
 
     img = cv2.imread(img_path)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    img = cv2.resize(img, (256, 256))
+    img = cv2.resize(img, (512, 512))
 
     img_input = img.astype(float) / 255.
     img_input = img_input.transpose([2, 0, 1])
     img_input = torch.tensor(img_input).float().to(device)
     img_input = img_input.unsqueeze(0)
+
 
     # scratch_outputs
     output_scratch = model_scratch(img_input)
@@ -107,7 +102,7 @@ def options():
 
     total_scratch = 0
 
-    area_scratch = outputs_scratch[0].sum()
+    area_scratch = (outputs_scratch[0]/40).sum()
     total_scratch += area_scratch * price_scratch
     print(area_scratch)
     print(total_scratch)
@@ -124,7 +119,7 @@ def options():
 
     total_Seperated = 0
 
-    area_Seperated = outputs_Seperated[0].sum()
+    area_Seperated = (outputs_Seperated[0]/40).sum()
     total_Seperated += area_Seperated * price_Seperated
 
     print(area_Seperated)
@@ -141,7 +136,7 @@ def options():
 
     total_crushed = 0
 
-    area_crushed = outputs_crushed[0].sum()
+    area_crushed = (outputs_crushed[0]/40).sum()
     total_crushed += area_crushed * price_crushed
 
     print(area_crushed)
@@ -159,19 +154,119 @@ def options():
 
     total_Breakage = 0
 
-    area_Breakage = outputs_Breakage[0].sum()
+    area_Breakage = (outputs_Breakage[0]/40).sum()
     total_Breakage += area_Breakage * price_Breakage
     print(area_Breakage)
     print(total_Breakage)
+    damage = [0] * 4
+    damage[0] = area_Breakage
+    damage[1] = area_crushed
+    damage[2] = area_scratch
+    damage[3] =area_Seperated
 
-    total_price = total_Breakage + total_crushed + total_Seperated + total_scratch
-    context = {'scratch_area': area_scratch, 'scratch_price': total_scratch, 'seperated_area': area_Seperated,
-               'sep_price': total_Seperated,
-               'crushed_area': area_crushed, 'crushed_price': total_crushed, 'breakage_area': area_Breakage,
-               'bre_price': total_Breakage,
-               'total_price': total_price}
+    part_change_price = {
+        'part01': 540000,  # 1.앞범퍼
+        "part02": 530000,  # 2.뒷범퍼
+        "part03": 770000,  # 3.트렁크
+        "part04": 210000,  # 4.전조등
+        "part05": 150000,  # 5.후램프
+        "part06": 860000,  # 6.본넷
+        "part07": 290000,  # 7.앞유리
+        "part08": 2150000,  # 8.루프
+        "part09": 210000,  # 9.뒷유리
+        "part10": 710000,  # 10.앞펜더
+        "part11": 2100000,  # 11.뒷펜더
+        "part12": 160000,  # 12.사이드미러
+        "part13": 800000,  # 13.앞도어
+        "part14": 850000,  # 14.뒷도어
+        "part15": 140000,  # 15.스텝
+        "part16": 100000,  # 16.타이어
+        "part17": 170000  # 17.바퀴 휠
+    }
+
+    # 사용자로부터 부품 번호 입력 받기
+    part_name = ''.join(request.form.getlist('car_part'))
+
+    def damage_repair_cost(damage, part_name):
+        sheet_metal_cost = calculate_sheet_metal_cost(damage, part_name)
+        paint_cost = calculate_paint_cost(damage, part_name)
+
+        if damage[3] >= 50:  # 이격 정도에 따른 교체 여부 판단
+            return part_change_price[part_name]  # 교체 비용
+        else:
+            return min(part_change_price[part_name], (sheet_metal_cost + paint_cost))  # 미교체시 판금 도색 비용 반환
+
+    def calculate_sheet_metal_cost(damage, part_name):  # 판금
+        if damage[0] < 20 and damage[1] < 20:  # damage[0] : 찢어짐 , damage[1] : 찌그러짐
+            return 0  # 찢어짐 일정 수치 미만 무시
+
+        elif damage[0] + damage[1] > 600:
+            return (part_change_price[part_name] - calculate_paint_cost(damage, part_name))
+
+        elif damage[0] > 300 or damage[1] > 400:
+            return (part_change_price[part_name] - calculate_paint_cost(damage, part_name))
+
+        elif damage[0] >= 20 and damage[1] >= 20:
+            return (damage[0] + damage[1]) / 6 * 10000
+
+        elif damage[0] >= 20 and damage[1] < 20:
+            return (damage[0] / 3) * 20000
+
+        elif damage[1] >= 20 and damage[0] < 20:
+            if damage[2] >= 50:
+                return (damage[1]) / 3 * 10000
+            else:
+                return 50000  # 판금 비용
+        else:
+            return 0
+
+    def calculate_paint_cost(damage, part_name):
+        basic_paint = 300000
+        if damage[2] < 20:
+            return 0.0
+
+        elif damage[2] >= 20 and damage[2] <= 60:
+            return damage[2] * 5000
+
+        elif part_name in ["본넷", "루프", "앞도어", "뒷도어"]:
+            if part_name == "본넷":  # 본넷
+                return basic_paint + 100000
+            elif part_name == "루프":  # 루프
+                return basic_paint + 200000
+            elif part_name in ["앞도어", "뒷도어"]:  # 도어
+                return basic_paint + 50000
+        else:
+            return basic_paint
+
+    # 수리 비용 계산
+    repair_cost = damage_repair_cost(damage, part_name)
+    rounded_repair_cost = round(repair_cost, -4)  # 100000자리 이하 반올림
+    rounded_repair_cost_int = int(rounded_repair_cost)  # 정수형으로 변환
+    repair_method1 = "부품 교체"
+    repair_method2 = "판금 및 도색"
+    if repair_cost == part_change_price[part_name]:
+        repair_method = repair_method1
+    else:
+        repair_method = repair_method2
+
+    context = {
+        'repair_method': repair_method,
+        'rounded_repair_cost': rounded_repair_cost_int
+    }
+
     return render_template('result.html', **context)
 
+    # print("수리 비용: {} 원".format(rounded_repair_cost_int))
+
+
+    # total_price = total_Breakage + total_crushed + total_Seperated + total_scratch
+    # context = {'scratch_area': area_scratch, 'scratch_price': total_scratch, 'seperated_area': area_Seperated,
+    #            'sep_price': total_Seperated,
+    #            'crushed_area': area_crushed, 'crushed_price': total_crushed, 'breakage_area': area_Breakage,
+    #            'bre_price': total_Breakage,
+    #            'total_price': total_price}
+    # return render_template('result.html', **context)
+    #
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)

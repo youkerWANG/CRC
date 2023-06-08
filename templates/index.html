@@ -41,7 +41,7 @@
     <div class="container">
   <div class="row">
     <div class="col-lg-12 col-xxl-12 text-center">
-      <h2 class="text-uppercase section-heading">사진 촬영 가이드라인:</h2>
+      <h2 class="text-uppercase section-heading">사진 촬영 가이드라인</h2>
       <h3 class="text-muted section-subheading"></h3>
     </div>
   </div>
@@ -52,7 +52,7 @@
     </div>
     <div class="col-md-4">
       <h4 class="section-heading">빛 반사를 방지하기 위해, 사진 촬영 시 밝은 광원이나 빛이 반사되지 않도록 주의해주세요.</h4>
-      <p class="text-muted">적절한 조명을 활용하여 파손 부위가 잘 보일 수 있게 해주세요.</p>
+      <p class="text-muted">적절한 조명을 활용하여 파손 부위가 잘 보일 수 있게 해주세요.</p> <br><br><br><br>
       <a class="btn btn-primary btn-xl text-uppercase" role="button" href="#portfolio">UPLOAD</a>
     </div>
     <div class="col-md-4">
@@ -66,7 +66,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="text-uppercase section-heading" id="upupload">사진 업로드</h2>
+                <h2 class="text-uppercase section-heading" id="upupload">사진 업로드</h2><br><br><br>
                 <h1>&nbsp;&nbsp;</h1>
                 <h1></h1>
             </div>
@@ -83,7 +83,7 @@
                 <div class="col">
                     <div class="p-3">
                         <form action="/upload_photos" method="post" enctype="multipart/form-data">
-                            <input type="file" name="photo" multiple><br>
+                            <input type="file" name="photo" multiple><br><br><br>
                             <input type="submit" value="submit">
                         </form>
                     </div>
@@ -91,17 +91,17 @@
                 <div class="col">
                     <div class="p-3">
                         <form action="/upload_option" method="post">
-                            <label for="pet-select">차량 모델 선택</label>
+                            <label for="pet-select">차량 선택 </label>
 
                             <select name="car_model" id="pet-select">
-                                <option value="">--Please choose an option--</option>
+                                <option value="">선택해 주세요</option>
                                 <option value="Sonata">Sonata</option>
                                 <option value="Sportage">Sportage</option>
-                            </select><br>
-                            <label for="pet-select">영역 선택</label>
+                            </select><br><br><br>
+                            <label for="pet-select">부품 선택 </label>
 
-                            <select name="car_part" id="pet-select" multiple="multiple">
-                                <option value="">--Please choose an option--</option>
+                            <select name="car_part" id="pet-select" >
+                                <option value="">선택해 주세요</option>
                                 <option value="part01">앞범퍼</option>
                                 <option value="part02">뒷범퍼</option>
                                 <option value="part03">트렁크</option>
@@ -117,8 +117,9 @@
                                 <option value="part13">앞도어</option>
                                 <option value="part14">뒷도어</option>
                                 <option value="part15">스텝</option>
+                                <option value="part16">타이어</option>
                                 <option value="part16">바퀴휠</option>
-                            </select><br>
+                            </select><br><br><br>
 
 
                             <button type="submit">submit</button>
